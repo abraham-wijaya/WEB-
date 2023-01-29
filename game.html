@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GAME SERU</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+    <!-- NAVIGATION BAR -->
+    <div class="container-navbar">
+        <ul class="ul-navbar">
+            <li class="li-navbar">
+                <a href="#" class="a-navbar">HOME</a>
+            </li>
+            <li class="li-navbar">
+                <a href="about.html" class="a-navbar">ABOUT ME</a>
+            </li>
+            <li class="li-navbar">
+                <a href="game.html" class="a-navbar">GAME</a>
+            </li>
+            <li class="li-navbar">
+                <a href="contact.html" class="a-navbar">CONTACT</a>
+            </li>
+
+        </ul>
+    </div>
+
+
+    <div id="app">
+        <div class="summary">
+            <h1 class="title">GAME BATU GUNTING KERTAS❤️</h1><br>
+            <h1 id="inGame"></h1>
+            <h1 id="result"></h1>
+        </div>
+
+
+
+        <div class="games">
+            <div class="option" onclick="pickOption('✊')"><img src="assets/batu.png" alt=""></div>
+            <div class="option" onclick="pickOption('✌️')"><img src="assets/gunting.png" alt=""></div>
+            <div class="option" onclick="pickOption('🖐️')"><img src="assets/kertas.png" alt=""></div>
+  </div>
+ </div>
+
+
+ 
+<!-- FOOTER -->
+<div class="container-footer">
+    <h1 class="h1-footer">Website ini dibuat dengan kerja keras</h1>
+
+</div>
+<!-- FOOTER END -->
+
+
+
+ 
+
+<script>
+    class Start {
+        constructor() {
+            this.playerName = "PLAYER"
+            this.botName = "BOT"
+            this.playerOption;
+            this.botOption;
+            this.winner = ""
+        }
+
+        get getBotOption(){
+            return this.botOption;
+        }
+
+        set setBotOption(option){
+            this.botOption = option;
+        }
+
+        get getPlayerOption() {
+           return this.playerOption 
+        }
+
+        set setPlayerOption(option){
+            this.playerOption = option;
+        }
+
+        botBrain(){
+            const option = ["🖐️","✊","✌️"];
+            const bot = option[Math.floor(Math.random() * option.length)];
+            return bot;
+        }
+
+        winCalculation(){
+            if(this.botOption == "🖐️" && this.playerOption == "✌️"){
+                return this.winner = this.playerName
+            }else if (this.botOption == "🖐️" && this.playerOption == "✊") {
+                return this.winner = this.botName;
+            }else if (this.botOption == "✌️" && this.playerOption == "🖐️") {
+                return this.winner = this.botName;
+            }else if (this.botOption == "✌️" && this.playerOption == "✊") {
+                return this.winner = this.playerName;
+            }else if (this.botOption == "✊" && this.playerOption == "🖐️"){
+                return this.winner = this.playerName;
+            }else if (this.botOption == "✊" && this.playerOption == "✌️") {
+                return this.winner = this.botName;
+            }else {
+                return this.winner = "SERI"
+            }
+        }
+
+        matchResult(){
+            if(this.winner != "SERI"){
+                return `${this.winner}MENANG`;
+            }else{
+                return `${this.winner},TIDAK ADA YANG MENANG`;
+            }
+    }
+
+
+}
+
+    function pickOption(params) {
+        const start = new Start();
+        start.setPlayerOption = params;
+        start.setBotOption = start.botBrain();
+        start.winCalculation();
+        console.log(`Player:${start.getPlayerOption} VS bot  ${start.getBotOption}`)
+        console.log ("HASIL AKHIR : ",start.matchResult())
+
+        const inGame = document.getElementById("inGame");
+        const result = document.getElementById("result");
+
+        inGame.textContent = `Player${start.getPlayerOption} VS bot  ${start.getBotOption}`
+        result.textContent = start.matchResult();
+    }
+</script>
+
+</body>
+</html>
